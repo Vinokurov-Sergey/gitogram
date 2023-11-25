@@ -1,0 +1,61 @@
+<template>
+    <div class="topline">
+        <topline>
+          <template #headline>
+            <div class="headline">
+              <div class="logo">
+                <icon name="logo" />
+              </div>
+              <div class="icon-list">
+                <div class="icon"><icon name="home" /></div>
+                <div class="icon"><icon name="user" /></div>
+                <div class="icon"><icon name="exit" /></div>
+                </div>
+            </div>
+            </template>
+            <template #content>
+              <ul class="stories">
+                <li class="stories-item" v-for="story in stories" :key="story.id">
+                  <story-user-item
+                      :avatar="story.avatar"
+                      :username="story.username"
+                      @onPress="handlePress(story.id)"/>
+                </li>
+              </ul>
+            </template>
+        </topline>
+    </div>
+    <div class="feed-item">
+      <feed></feed>
+    </div>
+</template>
+
+<script>
+import { topline } from '../../components/topline'
+import { icon } from '../../icons'
+import { storyUserItem } from '../../components/storyUserItem'
+import stories from './data.json'
+import { feed } from '../../components/feed'
+export default {
+  name: 'feeds',
+  components: {
+    topline,
+    icon,
+    storyUserItem,
+    feed
+  },
+  data () {
+    return {
+      stories
+    }
+  }
+}
+</script>
+
+<!-- <style lang="scss" scoped>
+  .icon {
+    width: 24px;
+  }
+  style
+</style> -->
+<style lang="scss" src="./feeds.scss" scoped></style>
