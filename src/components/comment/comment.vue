@@ -23,4 +23,12 @@ export default {
 }
 </script>
 
-<style lang="scss" src="./comment.scss" scoped></style>
+<style scoped>
+.c-comment {
+    display: flex;
+}
+
+.username {
+    font-weight: 700;
+}
+</style>

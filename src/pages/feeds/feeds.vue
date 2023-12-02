@@ -25,9 +25,7 @@
             </template>
         </topline>
     </div>
-    <div class="feed-item">
-      <feed></feed>
-    </div>
+        <feed></feed>
 </template>
 
 <script>
@@ -58,4 +56,29 @@ export default {
   }
   style
 </style> -->
-<style lang="scss" src="./feeds.scss" scoped></style>
+<style scoped>
+.headline {
+  display: flex;
+  justify-content: space-between;
+}
+
+.icon-list {
+  display: flex;
+}
+
+.icon {
+  width: 32px;
+  height: 32px;
+  margin-right: 2px;
+  }
+
+.logo {
+  width: 174px;
+  height: 35px;
+}
+
+.stories {
+    display: flex;
+    justify-content: space-between;
+}
+</style>

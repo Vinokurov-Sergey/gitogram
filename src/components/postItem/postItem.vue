@@ -18,4 +18,14 @@ export default {
 }
 </script>
 
-<style lang="scss" src="./postItem.scss" scoped></style>
+<style scoped>
+.head {
+    font-size: 26px;
+    font-weight: 700;
+}
+
+.text {
+    font-size: 14px;
+    font-weight: 400;
+}
+</style>

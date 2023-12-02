@@ -22,4 +22,24 @@ export default {
 }
 </script>
 
-<style lang="scss" src="./storyUserItem.scss" scoped></style>
+<style scoped>
+.username {
+    margin-top: 10px;
+    font-size: 12px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.img {
+  width: 80px;
+  height: 80px;
+}
+</style>

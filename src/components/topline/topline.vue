@@ -10,4 +10,14 @@
         </div>
     </div>
 </template>
-<style lang="scss" src="./topline.scss" scoped></style>
+<style scoped>
+.c-topline {
+    background: #F1F1F1;
+    border-bottom: 1px solid #C6C6C8;
+    padding: 42px 0 32px;
+}
+
+.content {
+    margin-top: 37px;
+}
+</style>
