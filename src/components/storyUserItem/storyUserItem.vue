@@ -1,5 +1,6 @@
 <template>
-    <button class="c-story-user-item" @click="$emit('onPress')">
+    <!-- <button class="c-story-user-item" @click="$emit('onPress')"> -->
+    <button class="c-story-user-item" @click="$emit('thisReadme')">
         <div class="avatar">
             <img :src="avatar" class="img" alt="username avatar">
         </div>
@@ -9,6 +10,7 @@
 
 <script>
 export default {
+  emits: ['thisReadme'],
   props: {
     avatar: {
       type: String,

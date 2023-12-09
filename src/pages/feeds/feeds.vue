@@ -15,11 +15,17 @@
             </template>
             <template #content>
               <ul class="stories">
-                <li class="stories-item" v-for="story in stories" :key="story.id">
+                <li class="stories-item" v-for="story in data" :key="story.id">
                   <story-user-item
-                      :avatar="story.avatar"
-                      :username="story.username"
-                      @onPress="handlePress(story.id)"/>
+                      :avatar="story.owner.avatar_url"
+                      :username="story.owner.login"
+                      @thisReadme="$router.push({
+                        name: 'stories',
+                        params: {
+                          initialSlide: story.id
+                        }
+                      })"
+                  />
                 </li>
               </ul>
             </template>
@@ -34,6 +40,7 @@ import { icon } from '../../icons'
 import { storyUserItem } from '../../components/storyUserItem'
 import stories from './data.json'
 import { feed } from '../../components/feed'
+import { mapState, mapActions } from 'vuex'
 export default {
   name: 'feeds',
   components: {
@@ -46,6 +53,15 @@ export default {
     return {
       stories
     }
+  },
+  computed: {
+    ...mapState(['data'])
+  },
+  methods: {
+    ...mapActions(['getData'])
+  },
+  mounted () {
+    this.getData()
   }
 }
 </script>

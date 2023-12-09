@@ -1,5 +1,5 @@
 <template>
-  <div class="c-progress" :class="{ active }">
+  <div class="c-progress" :class="{ active: active && startProgress }">
   <div ref="indicator" class="indicator"></div>
   </div>
 </template>
@@ -8,10 +8,9 @@
 export default {
   title: 'progress',
   emits: ['onFinish'],
-  data () {
-    return {
-      active: false
-    }
+  props: {
+    active: Boolean,
+    startProgress: Boolean
   },
   // emits: ["onFinish"],
   methods: {
@@ -20,9 +19,6 @@ export default {
     }
   },
   mounted () {
-    this.$nextTick(() => {
-      this.active = true
-    })
     this.$refs.indicator.addEventListener('transitioned', this.emitOnFinish)
   },
   beforeUnmount () {
@@ -32,8 +28,8 @@ export default {
 }
 </script>
 
+<!-- <style lang="scss" scoped src="./sliderProgress.scss"> -->
 <style scoped>
-
 .c-progress {
 background: rgba(49, 174, 84, 0.3);
 height: 2px;

@@ -1,7 +1,7 @@
 <template>
     <div class="c-feed">
           <ul class="posts">
-                <li class="posts-item" v-for="item in items" :key="item.id">
+                <li class="posts-item" v-for="item in data" :key="item.id">
                   <post-author
                       :avatar="item.owner.avatar_url"
                       :name="item.owner.login" />
@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import * as api from '../../api'
+// import * as api from '../../api'
 import { repositoryGit } from '../repositoryGit'
 import { postAuthor } from '../postAuthor'
 import { postItem } from '../postItem'
@@ -38,6 +38,7 @@ import { repositoryRating } from '../repositoryRating'
 import posts from './posts.json'
 import { comment } from '../comment'
 import { toggler } from '../toggler'
+import { mapState, mapActions } from 'vuex'
 
 export default {
   name: 'feed-item',
@@ -54,18 +55,17 @@ export default {
       shown: false, posts, items: []
     }
   },
-  async created () {
-    try {
-      const { data } = await api.trandings.getTrendings()
-      this.items = data.items
-    } catch (error) {
-      console.log(error)
-    }
+  computed: {
+    ...mapState(['data'])
   },
   methods: {
+    ...mapActions(['getData']),
     toggle (isOpened) {
       this.shown = isOpened
     }
+  },
+  mounted () {
+    this.getData()
   }
 }
 </script>
@@ -78,10 +78,4 @@ export default {
     flex-direction: column;
     justify-content: left;
 }
-
-/* .post-comments {
-  display: flex;
-  flex-direction: column;
-  justify-content: left;
-} */
 </style>
