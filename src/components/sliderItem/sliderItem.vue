@@ -2,7 +2,7 @@
   <div :class="['slide', { active }]">
     <div class='slide__wrapper'>
       <div class="header">
-        <sliderProgress :active="active" :startProgress="startProgress" @onFinish="$emit('onProgressFinish')"/>
+        <slider-progress :active="active" :startProgress="startProgress" @onFinish="$emit('onProgressFinish')"/>
         <post-author
                     :avatar="data.avatar"
                     :name="data.username" />

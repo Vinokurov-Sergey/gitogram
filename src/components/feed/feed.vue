@@ -21,8 +21,8 @@
             <toggler @onToggle="toggle" />
         <div class="comments" v-if="shown">
             <ul class="comments-list">
-                <li class="comments-item" v-for="n in 5" :key="n">
-                    <comment text="text" username="Josh" />
+                <li class="comments-item" v-for="issue in issues" :key="issue.id">
+                    <comment :text="issue.body" :username="issue.user.login" />
                 </li>
             </ul>
         </div>
@@ -50,11 +50,18 @@ export default {
     comment,
     toggler
   },
+  props: {
+    issues: {
+      type: Array,
+      required: true
+    }
+  },
   data () {
     return {
       shown: false, posts, items: []
     }
   },
+  emits: ['loadIssues'],
   computed: {
     ...mapState(['data'])
   },
@@ -62,6 +69,9 @@ export default {
     ...mapActions(['getData']),
     toggle (isOpened) {
       this.shown = isOpened
+      if (isOpened && this.issues.length === 0) {
+        this.$emit('loadIssues')
+      }
     }
   },
   mounted () {

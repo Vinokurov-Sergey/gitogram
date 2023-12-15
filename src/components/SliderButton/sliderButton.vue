@@ -1,12 +1,14 @@
 <template>
-    <button class="button"> {{ text || "Follow" }} </button>
+    <button :class="['button', `${theme}`]">
+    <slot />
+    </button>
 </template>
 
 <script>
 export default {
   title: 'sliderButton',
   props: {
-    text: String
+    theme: String
   }
 }
 
@@ -25,5 +27,17 @@ export default {
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    &.green {
+    background-color: #31AE54;
+    &:hover {
+      background-color: #208C32;
+    }
+  }
+  &.grey {
+    background-color: #9e9e9e;
+    &:hover {
+      background-color: #7c7c7c
+    }
+  }
 }
 </style>

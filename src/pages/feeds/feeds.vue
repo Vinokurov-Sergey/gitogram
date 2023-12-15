@@ -9,7 +9,7 @@
               <div class="icon-list">
                 <div class="icon"><icon name="home" /></div>
                 <div class="icon"><icon name="user" /></div>
-                <div class="icon"><icon name="exit" /></div>
+                <div class="icon"><icon name="exit" @click="exit"/></div>
                 </div>
             </div>
             </template>
@@ -58,7 +58,12 @@ export default {
     ...mapState(['data'])
   },
   methods: {
-    ...mapActions(['getData'])
+    ...mapActions(['getData']),
+    exit () {
+      localStorage.removeItem('token')
+      this.$router.replace({ name: 'auth' })
+      window.location.reload()
+    }
   },
   mounted () {
     this.getData()
