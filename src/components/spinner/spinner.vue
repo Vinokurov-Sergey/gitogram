@@ -1,5 +1,5 @@
 <template>
-    <div class="spinner">
+    <div class="['spinner', { btn }]">
       <icon name="spinner" />
     </div>
   </template>
@@ -7,7 +7,10 @@
 <script>
 import { icon } from '../../icons'
 export default {
-  components: { icon }
+  components: { icon },
+  props: {
+    btn: Boolean
+  }
 }
 </script>
 
@@ -19,6 +22,17 @@ export default {
     width: 44px;
     height: 44px;
     animation: rotate 1.3s linear infinite;
+    &.btn {
+    color: #fff;
+    width: 20px;
+    height: 20px;
+  }
+  }
+
+  .spinner .btn {
+    color: #fff;
+    width: 20px;
+    height: 20px;
   }
 
   @keyframes rotate {

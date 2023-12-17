@@ -1,5 +1,5 @@
 <template>
-    <button :class="['button', {'active': isOpened}]" @click="toggle">
+    <button :class="['button', {'active': isOpened}]" @click="toggle" id="id">
         <span class="text">{{ isOpened ? 'Hide' : 'Show' }} issues</span>
         <span class="icon">
             <icon name="triangle" />
@@ -13,6 +13,7 @@ export default {
   components: {
     icon
   },
+  emits: ['onToggle'],
   data () {
     return {
       isOpened: false

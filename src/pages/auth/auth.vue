@@ -40,18 +40,14 @@ export default {
     })
   },
   async created () {
-    console.log('auth created')
     const code = new URLSearchParams(window.location.search).get('code')
-    console.log('code = ', code)
     if (code !== null) {
       const token = await this.exchangeForToken(code)
-      console.log('token', token)
       localStorage.setItem('token', token)
     } else {
       return
     }
     const user = await this.getUser()
-    console.log('user = ', user)
     if (user) {
       this.$router.replace({ name: 'feeds' })
     }

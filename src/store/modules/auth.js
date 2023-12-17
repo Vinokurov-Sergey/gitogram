@@ -12,17 +12,14 @@ export default {
   },
   actions: {
     checkUser () {
-      console.log('modules auth checkUser')
       api.auth.getCode()
     },
     async exchangeForToken (store, code) {
-      console.log('modules auth exchangeForToken')
       const { data } = await api.auth.getToken(code)
       return data.token
     },
     async getUser ({ commit }) {
       try {
-        console.log('modules auth getUser')
         const { data } = await api.auth.getUserData()
         commit('SET_USER', data)
         return data

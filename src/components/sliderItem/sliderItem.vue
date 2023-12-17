@@ -17,7 +17,14 @@
         </div>
       </div>
       <div class="footer">
-        <sliderButton />
+        <sliderButton :theme="data.following.theme" @click="$emit(data.following.status ? 'onUnFollow' : 'onFollow', data.id)">
+          <template #default>
+            <span v-if="data.following.loading">
+              <spinner btn/>
+            </span>
+            <span v-else>{{data.following.status ? 'Unfollow' : 'Follow'}}</span>
+          </template>
+        </sliderButton>
       </div>
       <template v-if="active">
         <button class="arrow arrow-prev" v-if="navBtns.includes('prev')" @click="$emit('clickPrev')">
@@ -43,7 +50,7 @@ import { placeholder } from '../placeholder'
 import { spinner } from '../spinner'
 
 export default {
-  emits: ['clickPrev', 'clickNext', 'onProgressFinish'],
+  emits: ['clickPrev', 'clickNext', 'onProgressFinish', 'onFollow', 'onUnFollow'],
   props: {
     active: Boolean,
     loading: Boolean,
@@ -79,6 +86,13 @@ export default {
       pointer-events: initial;
       user-select: initial;
     }
+}
+
+.slide .active {
+  transform: scale(1);
+      z-index: 10;
+      pointer-events: initial;
+      user-select: initial;
 }
 .slide__wrapper {
     width: 376px;

@@ -1,44 +1,39 @@
 <template>
     <div class="c-feed">
-          <ul class="posts">
-                <li class="posts-item" v-for="item in data" :key="item.id">
                   <post-author
-                      :avatar="item.owner.avatar_url"
-                      :name="item.owner.login" />
+                      :avatar="avatar"
+                      :name="name" />
                     <repositoryGit>
                       <template #repositoryGit>
                         <post-item
-                          :head="item.name"
-                          :text="item.description"
+                          :head="head"
+                          :text="text"
                       />
                         <repository-rating
-                          :stars="item.stargazers_count"
-                          :forks="item.forks_count" />
+                          :stars="stars"
+                          :forks="forks" />
                       </template>
                     </repositoryGit>
-              </li>
-            </ul>
-            <toggler @onToggle="toggle" />
+                    <toggler @onToggle="toggle" />
         <div class="comments" v-if="shown">
             <ul class="comments-list">
                 <li class="comments-item" v-for="issue in issues" :key="issue.id">
-                    <comment :text="issue.body" :username="issue.user.login" />
+                      <comment :issue="issue" />
                 </li>
             </ul>
         </div>
+
     </div>
 </template>
 
 <script>
-// import * as api from '../../api'
 import { repositoryGit } from '../repositoryGit'
 import { postAuthor } from '../postAuthor'
 import { postItem } from '../postItem'
 import { repositoryRating } from '../repositoryRating'
-import posts from './posts.json'
+// import posts from './posts.json'
 import { comment } from '../comment'
 import { toggler } from '../toggler'
-import { mapState, mapActions } from 'vuex'
 
 export default {
   name: 'feed-item',
@@ -51,6 +46,30 @@ export default {
     toggler
   },
   props: {
+    name: {
+      type: String,
+      required: true
+    },
+    avatar: {
+      type: String,
+      required: true
+    },
+    head: {
+      type: String,
+      required: true
+    },
+    text: {
+      type: String,
+      required: true
+    },
+    stars: {
+      type: Number,
+      required: true
+    },
+    forks: {
+      type: Number,
+      required: true
+    },
     issues: {
       type: Array,
       required: true
@@ -58,24 +77,18 @@ export default {
   },
   data () {
     return {
-      shown: false, posts, items: []
+      shown: false
     }
   },
   emits: ['loadIssues'],
-  computed: {
-    ...mapState(['data'])
-  },
   methods: {
-    ...mapActions(['getData']),
     toggle (isOpened) {
       this.shown = isOpened
       if (isOpened && this.issues.length === 0) {
         this.$emit('loadIssues')
+      // }
       }
     }
-  },
-  mounted () {
-    this.getData()
   }
 }
 </script>

@@ -40,4 +40,13 @@ export default {
     }
   }
 }
+
+.button .grey {
+  background-color: #9e9e9e;
+}
+
+.button .grey:hover {
+  background-color: #7c7c7c
+}
+
 </style>

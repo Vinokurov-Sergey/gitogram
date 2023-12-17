@@ -13,6 +13,7 @@
               @clickNext="handleSlide(slideIndex + 1)"
               @onProgressFinish="handleSlide(slideIndex + 1)"
               @onFollow="starRepo(item.id)"
+              @onUnFollow="unStarRepo(item.id)"
             />
           </li>
         </ul>
@@ -55,7 +56,8 @@ export default {
     ...mapActions({
       getData: 'trendings/getData',
       getReadme: 'trendings/getReadme',
-      starRepo: 'trendings/starRepo'
+      starRepo: 'trendings/starRepo',
+      unStarRepo: 'trendings/unStarRepo'
     }),
     getStoryData (obj) {
       return {
@@ -109,7 +111,9 @@ export default {
       const index = this.data.findIndex(item => item.id === this.initialSlide)
       await this.handleSlide(index)
     }
-    await this.getData()
+    if (this.data.length === 0) {
+      await this.getData()
+    }
     await this.loadReadme()
   }
 }

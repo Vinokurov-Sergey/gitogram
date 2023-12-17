@@ -1,7 +1,7 @@
 import { makeRequest } from '../requests'
-
-const clientId = ''
-const clientSecret = ''
+import env from '../../../env'
+// const clientId = '5b9784dcf299acb5dfac'
+// const clientSecret = '5d5fda2b9282742d249f180c9f537f427afdaa0d'
 
 export const getCode = () => {
   console.log('getCode')
@@ -10,20 +10,20 @@ export const getCode = () => {
 
   const params = new URLSearchParams()
 
-  params.append('client_Id', clientId)
+  params.append('client_id', env.clientId)
   // params.append('scope', 'repo:status read:user')
+  // params.append('scope', 'repo,user')
 
   window.location.href = `${githubApi}?${params}`
 }
 
 export const getToken = (code) => {
-  console.log('getToken')
   return makeRequest({
     url: 'https://webdev-api.loftschool.com/github',
     method: 'post',
     data: {
-      clientId: clientId,
-      clientSecret: clientSecret,
+      clientId: env.clientId,
+      clientSecret: env.clientSecret,
       code
     }
   })
