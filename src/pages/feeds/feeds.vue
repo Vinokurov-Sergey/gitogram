@@ -8,17 +8,13 @@
               </div>
               <div class="icon-list">
                 <div class="icon"><icon name="home" /></div>
-                <!-- <div class="icon"><img :src="this.user.avatar_url"></div> -->
-                <div class="icon"><myUser :avatar="user?.avatar_url" /></div>
-                <!-- <div class="icon"><icon name="user" /></div> -->
+                <div class="icon"><myUser :avatar="user?.avatar_url" @click="$router.push({ name: 'repos' })"/></div>
                 <div class="icon"><icon name="exit" @click="exit"/></div>
                 </div>
             </div>
             </template>
             <template #content>
               <ul class="stories">
-                <!-- <li class="stories-item" v-for="story in data" :key="story.id"> -->
-                  <!-- <li class="stories-item" v-for="{id, owner, name} in getUnstarredOnly" :key="id"> -->
                   <li class="stories-item" v-for="story in getUnstarredOnly" :key="story.id">
                   <story-user-item
                       :avatar="story.owner?.avatar_url"
@@ -30,16 +26,6 @@
                         }
                       })"
                   />
-                  <!-- <story-user-item
-                      :avatar="owner"
-                      :username="name"
-                      @thisReadme="$router.push({
-                        name: 'stories',
-                        params: {
-                          initialSlide: story.id
-                        }
-                      })"
-                  /> -->
                 </li>
               </ul>
             </template>
@@ -84,21 +70,17 @@ export default {
     }
   },
   computed: {
-    // ...mapState(['data']),
     ...mapState({
       data: state => state.trendings.data,
       user: state => state.auth.user,
       starred: state => state.starred.starred
     }),
     ...mapGetters(['getUnstarredOnly'])
-    // ...mapGetters({ getUnstarredOnly: state => state.index.getUnstarredOnly })
   },
   methods: {
-    // ...mapActions(['getData']),
     ...mapActions({
       getData: 'trendings/getData',
       getIssues: 'starred/getIssues',
-      // getIssues: 'trendings/getIssues',
       getUser: 'auth/getUser',
       getStarred: 'starred/getStarred'
     }),
@@ -117,7 +99,6 @@ export default {
     if (this.starred === null) {
       await this.getStarred()
     }
-    // await this.getData()
     if (this.data.length === 0) {
       await this.getData()
     }

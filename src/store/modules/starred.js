@@ -48,9 +48,9 @@ export default {
       }
     },
     async unFollow ({ commit, getters }, id) {
-      const { name: repo, owner } = getters.getStarredById(id)
+      const repo = getters.getStarredById(id)
       try {
-        await api.starred.unStarRepo({ owner: owner.login, repo })
+        await api.starred.unStarRepo({ owner: repo.owner.login, repo: repo.name })
         commit('DELETE_STAR', id)
       } catch (error) {
         console.log(error)

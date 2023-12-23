@@ -1,11 +1,7 @@
 import { makeRequest } from '../requests'
 import env from '../../../env'
-// const clientId = '5b9784dcf299acb5dfac'
-// const clientSecret = '5d5fda2b9282742d249f180c9f537f427afdaa0d'
 
 export const getCode = () => {
-  console.log('getCode')
-  // debugger
   const githubApi = 'https://github.com/login/oauth/authorize'
 
   const params = new URLSearchParams()

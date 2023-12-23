@@ -1,5 +1,5 @@
 <template>
-        <div class="user-avatar">
+          <div :class="['user-avatar', getClasses()]">
             <img :src="avatar" class="img" alt="user avatar">
     </div>
 </template>
@@ -10,6 +10,17 @@ export default {
     avatar: {
       type: String,
       required: true
+    },
+    type: {
+      type: String
+    }
+  },
+  methods: {
+    getClasses () {
+      const classes = {
+        profile: this.type === 'profile'
+      }
+      return classes
     }
   }
 }
@@ -28,5 +39,12 @@ export default {
     height: 32px;
     border-radius: 50%;
     overflow: hidden;
+}
+
+.user-avatar.profile {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  overflow: hidden;
 }
 </style>
